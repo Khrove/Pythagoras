@@ -12,6 +12,7 @@ def main():
 
         login_page.navigate()
         login_page.login('sit_t1_reg1auto@yopmail.com', 'Test@123')
+        grade_view.validate_level('Level 3')
         grade_view.validate_module_title('Units of Any Number')
         grade_view.click_on_module('Multiplication and Area')
 
