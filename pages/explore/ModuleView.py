@@ -13,4 +13,4 @@ class ExploreModuleView:
 
     def select_assessment(self, assessment):
         self.moduleContainerComp.assessments_dropdown.click()
-        self.moduleContainerComp.get_assesment_option(assessment)
+        self.moduleContainerComp.get_assessment_option(assessment)

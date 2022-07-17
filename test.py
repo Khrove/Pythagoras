@@ -33,6 +33,7 @@ def main():
         module_view.select_assessment('Module 4 Assessment version 1')
 
         assess_page.validate_title('Level 3, Module 4, Module Assessment 1')
+        assess_page.assign_assessment('Class 2022-23')
 
         browser.close()
 
