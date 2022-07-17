@@ -1,5 +1,6 @@
 from playwright.sync_api import expect
-from components.subheader import SubHeaderComp
+from components.globals.subheader import SubHeaderComp
+import globals
 
 
 class ExploreGradeView:
@@ -16,7 +17,7 @@ class ExploreGradeView:
             self.page.locator(f'text={level}').click()
 
     def validate_module_title(self, title):
-        expect(self.title).to_have_text(title, timeout=10000)
+        expect(self.title).to_have_text(title, timeout=globals.timeout)
 
     def click_on_module(self, title):
         self.page.locator(f'text={title}').click()
