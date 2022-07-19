@@ -34,6 +34,7 @@ def main():
 
         assess_page.validate_title('Level 3, Module 4, Module Assessment 1')
         assess_page.assign_assessment('Class 2022-23')
+        assess_page.navigate_to('Assign')
 
         browser.close()
 
