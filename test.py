@@ -7,6 +7,7 @@ from pages.LoginPage import LoginPage
 from pages.explore.GradeView import ExploreGradeView
 from pages.explore.ModuleView import ExploreModuleView
 from pages.assess.Assess import AssessPage
+from pages.assign.assign import AssignPage
 
 load_dotenv()
 
@@ -23,6 +24,7 @@ def main():
         grade_view = ExploreGradeView(page)
         module_view = ExploreModuleView(page)
         assess_page = AssessPage(page)
+        assign_page = AssignPage(page)
 
         login_page.navigate()
         login_page.login(os.environ.get("T1_REG1"), os.environ.get("PASSWORD"))
@@ -35,6 +37,8 @@ def main():
         assess_page.validate_title('Level 3, Module 4, Module Assessment 1')
         assess_page.assign_assessment('Class 2022-23')
         assess_page.navigate_to('Assign')
+
+        assign_page.get_assignment_record('Level 3, Module 4, Module Assessment 1')
 
         browser.close()
 
