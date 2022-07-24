@@ -7,7 +7,8 @@ from pages.LoginPage import LoginPage
 from pages.explore.GradeView import ExploreGradeView
 from pages.explore.ModuleView import ExploreModuleView
 from pages.assess.Assess import AssessPage
-from pages.assign.assign import AssignPage
+from pages.assign.Assign import AssignPage
+from pages.student.HomePage import StudentHomePage
 
 load_dotenv()
 
@@ -18,16 +19,25 @@ load_dotenv(dotenv_path)
 def main():
     with sync_playwright() as p:
         globals.init()
-        browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
-        login_page = LoginPage(page)
-        grade_view = ExploreGradeView(page)
-        module_view = ExploreModuleView(page)
-        assess_page = AssessPage(page)
-        assign_page = AssignPage(page)
+        chromium = p.chromium
+        browser = chromium.launch(headless=False)
+        teacher_context = browser.new_context().new_page()
+        student_context = browser.new_context().new_page()
+        teacher_login_page = LoginPage(teacher_context)
+        grade_view = ExploreGradeView(teacher_context)
+        module_view = ExploreModuleView(teacher_context)
+        assess_page = AssessPage(teacher_context)
+        assign_page = AssignPage(teacher_context)
+        student_login_page = LoginPage(student_context)
+        student_home_page = StudentHomePage(student_context)
 
-        login_page.navigate()
-        login_page.login(os.environ.get("T1_REG1"), os.environ.get("PASSWORD"))
+        teacher_login_page.navigate()
+        teacher_login_page.login(os.environ.get("T1_REG1"), os.environ.get("PASSWORD"))
+        assess_page.navigate_to('Assign')
+        assign_page.wait_for_page()
+        assign_page.delete_assignment('Level 3, Module 4, Module Assessment 1')
+        assess_page.navigate_to('Teach')
+
         grade_view.validate_level('Level 3')
         grade_view.validate_module_title('Units of Any Number')
         grade_view.click_on_module('Multiplication and Area')
@@ -39,6 +49,14 @@ def main():
         assess_page.navigate_to('Assign')
 
         assign_page.get_assignment_record('Level 3, Module 4, Module Assessment 1')
+
+        student_login_page.navigate()
+        student_login_page.login(os.environ.get("S1_REG1"), os.environ.get("PASSWORD"))
+        student_home_page.wait_for_page()
+        student_home_page.open_assessment('Level 3, Module 4, Module Assessment 1')
+
+        assign_page.wait_for_page()
+        assign_page.delete_assignment('Level 3, Module 4, Module Assessment 1')
 
         browser.close()
 
