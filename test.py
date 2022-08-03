@@ -9,6 +9,7 @@ from pages.explore.ModuleView import ExploreModuleView
 from pages.assess.Assess import AssessPage
 from pages.assign.Assign import AssignPage
 from pages.student.HomePage import StudentHomePage
+from pages.student.assessment.Assessment import StudentAssessmentPage
 
 load_dotenv()
 
@@ -28,8 +29,10 @@ def main():
         module_view = ExploreModuleView(teacher_context)
         assess_page = AssessPage(teacher_context)
         assign_page = AssignPage(teacher_context)
+
         student_login_page = LoginPage(student_context)
         student_home_page = StudentHomePage(student_context)
+        student_assessment_page = StudentAssessmentPage(student_context)
 
         teacher_login_page.navigate()
         teacher_login_page.login(os.environ.get("T1_REG1"), os.environ.get("PASSWORD"))
@@ -55,8 +58,16 @@ def main():
         student_home_page.wait_for_page()
         student_home_page.open_assessment('Level 3, Module 4, Module Assessment 1')
 
-        assign_page.wait_for_page()
-        assign_page.delete_assignment('Level 3, Module 4, Module Assessment 1')
+        student_assessment_page.start_assessment()
+        student_assessment_page.complete_radio_question(0, 0, 1)
+        student_assessment_page.complete_radio_question(0, 1, 0)
+        student_assessment_page.complete_radio_question(0, 2, 1)
+        student_assessment_page.click_next_btn()
+
+        student_assessment_page.complete_input_question(1, 0, '2')
+
+        # assign_page.wait_for_page()
+        # assign_page.delete_assignment('Level 3, Module 4, Module Assessment 1')
 
         browser.close()
 

@@ -15,6 +15,7 @@ class StudentHomePage:
                 self.scroll_assessment()
             if title == assessment:
                 self.assessment_title.nth(i).click()
+                break
 
     def scroll_assessment(self):
         self.right_btn.click()
