@@ -15,8 +15,11 @@ class StudentAssessmentPage:
         self.next_btn.click()
 
     def complete_radio_question(self, question, part, answer):
-        self.questions.nth(question).locator('.lrn_stem').nth(part).locator('[type="radio"]').nth(answer).click()
+        self.questions.nth(question).locator('[type="radio"], .lrn-mcq-option').nth(answer).click()
 
     def complete_input_question(self, question, part, answer):
-        self.questions.nth(question).locator('.lrn_textinput').nth(part).fill(answer)
+        self.questions.nth(question).locator('.lrn_textinput').nth(part).click()
+        self.questions.nth(question).locator('.lrn_textinput').nth(part).type(answer)
 
+    def complete_box_click_question(self, question, answer):
+        self.questions.nth(question).locator('.lrn-shading-cell').nth(answer).click()

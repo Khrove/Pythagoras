@@ -65,6 +65,12 @@ def main():
         student_assessment_page.click_next_btn()
 
         student_assessment_page.complete_input_question(1, 0, '2')
+        student_assessment_page.click_next_btn()
+
+        student_assessment_page.complete_radio_question(2, 0, 1)
+        student_assessment_page.complete_box_click_question(2, 0)
+        student_assessment_page.complete_box_click_question(2, 1)
+        student_assessment_page.click_next_btn()
 
         # assign_page.wait_for_page()
         # assign_page.delete_assignment('Level 3, Module 4, Module Assessment 1')
