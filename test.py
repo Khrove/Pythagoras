@@ -70,6 +70,7 @@ def main():
         student_assessment_page.complete_radio_question(2, 0, 1)
         student_assessment_page.complete_box_click_question(2, 0)
         student_assessment_page.complete_box_click_question(2, 1)
+        student_assessment_page.complete_select_question(2, 1, 1)
         student_assessment_page.click_next_btn()
 
         # assign_page.wait_for_page()
