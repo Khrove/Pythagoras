@@ -49,6 +49,8 @@ def main():
 
         assess_page.validate_title('Level 3, Module 4, Module Assessment 1')
         assess_page.assign_assessment('Class 2022-23')
+        assess_page.update_start_time()
+        assess_page.click_assign_btn()
         assess_page.navigate_to('Assign')
 
         assign_page.get_assignment_record('Level 3, Module 4, Module Assessment 1')

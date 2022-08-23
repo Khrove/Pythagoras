@@ -20,10 +20,7 @@ class StudentAssessmentPage:
     def complete_input_question(self, question, part, answer):
         self.questions.nth(question).locator('.lrn_textinput').nth(part).click()
         self.questions.nth(question).locator('.lrn_textinput').nth(part).type(answer)
-
-    def complete_box_click_question(self, question, answer):
         self.questions.nth(question).locator('.lrn-shading-cell').nth(answer).click()
 
     def complete_select_question(self, question, part, answer):
-        self.questions.nth(question).locator('.lrn-cloze-select').nth(part).click()
-        self.questions.nth(question).locator('.lrn-cloze-select').nth(part).locator('[role="option"]').nth(answer).click()
+        self.page.select_option('.lrn-cloze-select', {'value': 'less than'})
